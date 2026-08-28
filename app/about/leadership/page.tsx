@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CorporateSubnav } from "@/components/about/CorporateSubnav";
-import { CorporatePageHero } from "@/components/about/CorporatePageHero";
+import { PageHero } from "@/components/layout/PageHero";
 import { LeadershipEmptyState } from "@/components/about/LeadershipEmptyState";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
@@ -25,7 +25,7 @@ export default function LeadershipPage() {
   return (
     <>
       <CorporateSubnav active="leadership" />
-      <CorporatePageHero eyebrow="About NUVAIX" title="Leadership" description={description} />
+      <PageHero eyebrow="About NUVAIX" title="Leadership" description={description} />
 
       <Section tone="black">
         <SectionHeading

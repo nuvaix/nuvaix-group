@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CorporateSubnav } from "@/components/about/CorporateSubnav";
-import { CorporatePageHero } from "@/components/about/CorporatePageHero";
+import { PageHero } from "@/components/layout/PageHero";
 import { AboutIntro } from "@/components/about/AboutIntro";
 import { CorporateIdentity } from "@/components/about/CorporateIdentity";
 import { BusinessStructure } from "@/components/about/BusinessStructure";
@@ -21,7 +21,7 @@ export default function AboutPage() {
   return (
     <>
       <CorporateSubnav active="about" />
-      <CorporatePageHero
+      <PageHero
         eyebrow="About NUVAIX"
         title="Building with purpose. Growing with vision."
         description="NUVAIX GROUP is a diversified, technology-driven enterprise built across multiple industries."

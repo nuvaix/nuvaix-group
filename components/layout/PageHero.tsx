@@ -4,7 +4,7 @@ import { PageContainer } from "@/components/layout/PageContainer";
 import { Button } from "@/components/ui/Button";
 import { GeometricField, type GeometricFieldTone } from "@/components/home/GeometricField";
 
-export interface CorporatePageHeroProps {
+export interface PageHeroProps {
   eyebrow: string;
   title: string;
   description?: string;
@@ -16,12 +16,13 @@ export interface CorporatePageHeroProps {
 }
 
 /**
- * The shared hero for every About-section page, so each one does not
- * reimplement the same layout. Deliberately shorter than the homepage's
- * full-viewport cinematic hero (Section size="large", not min-h-screen):
- * internal pages should feel related to the homepage, not identical to it.
+ * The shared internal-page hero, used across the About section and the
+ * business directory, so each page does not reimplement the same
+ * layout. Deliberately shorter than the homepage's full-viewport
+ * cinematic hero (Section size="large", not min-h-screen): internal
+ * pages should feel related to the homepage, not identical to it.
  */
-export function CorporatePageHero({
+export function PageHero({
   eyebrow,
   title,
   description,
@@ -29,7 +30,7 @@ export function CorporatePageHero({
   visual = true,
   visualTone = "silver",
   cta,
-}: CorporatePageHeroProps) {
+}: PageHeroProps) {
   const isLight = theme === "light";
 
   return (

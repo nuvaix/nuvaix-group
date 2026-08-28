@@ -6,10 +6,8 @@ import { PlannedStatusBadge } from "@/components/ui/PlannedStatusBadge";
 import { ArrowRightIcon } from "@/components/icons";
 import { businesses } from "@/data/businesses";
 
-const technology = businesses.find((business) => business.slug === "technology-it-solutions");
-const secondaryDivisions = businesses.filter(
-  (business) => business.slug !== "technology-it-solutions",
-);
+const featured = businesses.find((business) => business.featured);
+const secondaryDivisions = businesses.filter((business) => !business.featured);
 
 /**
  * Structured hierarchy, not eleven identical cards: Technology and Paint
@@ -27,18 +25,16 @@ export function BusinessEcosystem() {
       />
 
       <div className="mt-12 grid gap-6 lg:grid-cols-2">
-        {technology ? (
+        {featured ? (
           <Card
             tone="premium"
-            href={`/businesses/${technology.slug}`}
+            href={`/businesses/${featured.slug}`}
             className="flex flex-col justify-between"
           >
             <div>
-              <p className="copy-caption text-subtle-foreground tabular-nums">
-                {technology.number}
-              </p>
-              <h3 className="heading-h3 mt-3">{technology.name}</h3>
-              <p className="copy-body text-muted-foreground mt-3">{technology.category}</p>
+              <p className="copy-caption text-subtle-foreground tabular-nums">{featured.number}</p>
+              <h3 className="heading-h3 mt-3">{featured.name}</h3>
+              <p className="copy-body text-muted-foreground mt-3">{featured.category}</p>
             </div>
             <span className="label-nav mt-8 inline-flex items-center gap-2 text-champagne-gold">
               View division

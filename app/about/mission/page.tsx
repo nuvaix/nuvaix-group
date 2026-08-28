@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CorporateSubnav } from "@/components/about/CorporateSubnav";
-import { CorporatePageHero } from "@/components/about/CorporatePageHero";
+import { PageHero } from "@/components/layout/PageHero";
 import { MissionStatement } from "@/components/about/MissionStatement";
 import { ContactCTA } from "@/components/home/ContactCTA";
 
@@ -17,7 +17,7 @@ export default function MissionPage() {
   return (
     <>
       <CorporateSubnav active="mission" />
-      <CorporatePageHero eyebrow="About NUVAIX" title="Mission" description={description} />
+      <PageHero eyebrow="About NUVAIX" title="Mission" description={description} />
       <MissionStatement />
       <ContactCTA />
     </>
