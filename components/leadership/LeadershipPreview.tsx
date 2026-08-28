@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/Button";
 import { leadership } from "@/data/leadership";
 
 /**
- * Minimal, centered editorial statement. Leadership data is empty (no
- * verified public titles yet): this renders the section's visual
- * structure honestly rather than inventing bios, matching the
- * /about/leadership placeholder's wording.
+ * Minimal, centered editorial statement, reused on both the homepage and
+ * /about (see docs/17 IA notes: shared across pages, not home-specific).
+ * Leadership data is empty (no verified public titles yet): this renders
+ * the section's visual structure honestly rather than inventing bios.
  */
 export function LeadershipPreview() {
   const hasLeadership = leadership.length > 0;

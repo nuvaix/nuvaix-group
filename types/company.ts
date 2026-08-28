@@ -10,6 +10,11 @@ export interface ValuePillar {
   word: string;
   /** Short description of that pillar, approved alongside the brand line. */
   description: string;
+  /** Longer editorial gloss for /about/values. Interpretive, not a new
+   * factual claim: no statistics, dates or achievements. */
+  meaning: string;
+  /** How the pillar shows up across the business, in general terms only. */
+  application: string;
 }
 
 export interface CompanyIdentity {

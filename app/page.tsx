@@ -6,7 +6,7 @@ import { TechnologyFeature } from "@/components/home/TechnologyFeature";
 import { PaintFeature } from "@/components/home/PaintFeature";
 import { ValueFramework } from "@/components/home/ValueFramework";
 import { CapabilityPreview } from "@/components/home/CapabilityPreview";
-import { LeadershipPreview } from "@/components/home/LeadershipPreview";
+import { LeadershipPreview } from "@/components/leadership/LeadershipPreview";
 import { PartnershipCTA } from "@/components/home/PartnershipCTA";
 import { ContactCTA } from "@/components/home/ContactCTA";
 

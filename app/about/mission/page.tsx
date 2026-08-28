@@ -1,8 +1,25 @@
 import type { Metadata } from "next";
-import { RoutePlaceholder } from "@/components/dev/RoutePlaceholder";
+import { CorporateSubnav } from "@/components/about/CorporateSubnav";
+import { CorporatePageHero } from "@/components/about/CorporatePageHero";
+import { MissionStatement } from "@/components/about/MissionStatement";
+import { ContactCTA } from "@/components/home/ContactCTA";
 
-export const metadata: Metadata = { title: "Mission" };
+const description =
+  "The mission behind NUVAIX GROUP, a diversified, technology-driven enterprise built across multiple industries.";
+
+export const metadata: Metadata = {
+  title: "Mission",
+  description,
+  alternates: { canonical: "/about/mission" },
+};
 
 export default function MissionPage() {
-  return <RoutePlaceholder eyebrow="About" title="Mission" />;
+  return (
+    <>
+      <CorporateSubnav active="mission" />
+      <CorporatePageHero eyebrow="About NUVAIX" title="Mission" description={description} />
+      <MissionStatement />
+      <ContactCTA />
+    </>
+  );
 }
