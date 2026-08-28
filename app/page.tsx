@@ -1,26 +1,47 @@
-import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/layout/SectionHeading";
-import { Button } from "@/components/ui/Button";
-import { company } from "@/data/company";
+import type { Metadata } from "next";
+import { HomeHero } from "@/components/home/HomeHero";
+import { HomeIntro } from "@/components/home/HomeIntro";
+import { BusinessEcosystem } from "@/components/home/BusinessEcosystem";
+import { TechnologyFeature } from "@/components/home/TechnologyFeature";
+import { PaintFeature } from "@/components/home/PaintFeature";
+import { ValueFramework } from "@/components/home/ValueFramework";
+import { CapabilityPreview } from "@/components/home/CapabilityPreview";
+import { LeadershipPreview } from "@/components/home/LeadershipPreview";
+import { PartnershipCTA } from "@/components/home/PartnershipCTA";
+import { ContactCTA } from "@/components/home/ContactCTA";
+
+const description =
+  "NUVAIX GROUP is a diversified, technology-driven enterprise operating across construction, real estate, technology, automobile, logistics, manufacturing, healthcare, retail and agriculture, consultancy and investment, alongside its NUVAIX Paint initiative.";
+
+export const metadata: Metadata = {
+  title: "NUVAIX GROUP",
+  description,
+  openGraph: {
+    title: "NUVAIX GROUP",
+    description,
+    type: "website",
+  },
+};
 
 /**
- * Temporary foundation placeholder for the root route. This is not the
- * homepage: the real homepage (hero, business divisions, technology,
- * NUVAIX Paint, projects, leadership, partnerships, contact) is built in
- * a later milestone per docs/03-page-specifications.md.
+ * The homepage composes ten reusable, mostly Server Component sections
+ * (see components/home). None of them requires client interactivity on
+ * its own; the only client boundaries on this route come from the global
+ * Header/ToastProvider shell in app/layout.tsx.
  */
 export default function Home() {
   return (
-    <Section tone="black">
-      <SectionHeading
-        as="h1"
-        eyebrow={company.brandName}
-        title="Project foundation"
-        description={`${company.legalName}, RC ${company.rcNumber}. The public site is under active construction. This placeholder will be replaced by the full homepage in a later milestone.`}
-      />
-      <div className="mt-8">
-        <Button href="/design-system">View design system</Button>
-      </div>
-    </Section>
+    <>
+      <HomeHero />
+      <HomeIntro />
+      <BusinessEcosystem />
+      <TechnologyFeature />
+      <PaintFeature />
+      <ValueFramework />
+      <CapabilityPreview />
+      <LeadershipPreview />
+      <PartnershipCTA />
+      <ContactCTA />
+    </>
   );
 }

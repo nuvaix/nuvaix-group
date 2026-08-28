@@ -283,6 +283,41 @@
   .surface-interactive {
     @apply border border-transparent bg-surface text-surface-foreground transition-colors duration-(--duration-fast) ease-(--ease-standard) hover:border-border-hover hover:bg-surface-hover;
   }
+
+  /* ---------------------------------------------------------------------
+   * Homepage entrance/ambient motion (Milestone 4). A one-time reveal for
+   * content on mount, and a slow ambient drift for decorative
+   * backgrounds only. Both are neutralized by the global
+   * prefers-reduced-motion rule below; .animate-reveal's end state is the
+   * final visible position, so reduced motion still lands correctly.
+   * --------------------------------------------------------------------- */
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.06) translate3d(-1.5%, 1.5%, 0);
+    }
+  }
+
+  .animate-reveal {
+    animation: reveal var(--duration-slow) var(--ease-standard) both;
+  }
+
+  .animate-drift {
+    animation: drift 32s var(--ease-standard) infinite alternate;
+  }
 }
 
 @layer base {

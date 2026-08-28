@@ -12,4 +12,11 @@ export const company: CompanyIdentity = {
   legalName: "NUVAIX SOLUTIONS LTD",
   rcNumber: "9597904",
   brandLine: "INNOVATE • BUILD • DELIVER • GROW",
+  heroLines: ["Innovating today.", "Building tomorrow.", "Growing together."],
+  valuePillars: [
+    { word: "Innovate", description: "Create new ideas and solutions." },
+    { word: "Build", description: "Turn strategy into practical outcomes." },
+    { word: "Deliver", description: "Execute with quality and discipline." },
+    { word: "Grow", description: "Build sustainable long-term value." },
+  ],
 };
