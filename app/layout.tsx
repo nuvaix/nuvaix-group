@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import "./globals.css";
 import { baseMetadata, baseViewport } from "@/lib/metadata";
+import { ToastProvider } from "@/components/ui/ToastProvider";
 
 export const metadata = baseMetadata;
 export const viewport = baseViewport;
@@ -15,7 +16,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to main content
         </a>
-        <main id="main-content">{children}</main>
+        <ToastProvider>
+          <main id="main-content">{children}</main>
+        </ToastProvider>
       </body>
     </html>
   );

@@ -8,34 +8,82 @@
  * classes from every key here (for example --color-champagne-gold produces
  * bg-champagne-gold, text-champagne-gold, border-champagne-gold, and so on).
  *
- * Do not hard-code brand hex values, font sizes, or radii anywhere else in
- * the codebase. Extend or adjust the values below instead.
+ * Do not hard-code brand hex values, font sizes, radii or spacing anywhere
+ * else in the codebase. Extend or adjust the values below instead. See
+ * docs/18-design-system-reference.md for the full rationale.
  */
 @theme {
-  /* Brand colors (see docs/04-design-system.md) */
+  /* ---------------------------------------------------------------------
+   * Brand colors (see docs/04-design-system.md). These 5 hex values are
+   * the only place brand color literals are defined in the codebase.
+   * --------------------------------------------------------------------- */
   --color-midnight-sapphire: #0a1d3d;
   --color-titanium-silver: #c0c6cf;
   --color-champagne-gold: #d4af37;
   --color-deep-black: #030507;
   --color-off-white: #f5f5f2;
 
-  /* Semantic color roles, built from the brand colors above */
+  /* ---------------------------------------------------------------------
+   * Semantic color roles. Every value below is derived from the 5 brand
+   * colors above (direct reference or color-mix of them), never a new
+   * arbitrary color, so the whole UI stays visually anchored to the
+   * approved palette. success/warning/error are the one deliberate
+   * exception: distinct, desaturated hues are required so system
+   * feedback is unambiguous, but they are tuned to sit quietly alongside
+   * the brand palette rather than reading as generic UI-kit colors.
+   * --------------------------------------------------------------------- */
   --color-background: var(--color-deep-black);
+  --color-background-elevated: var(--color-midnight-sapphire);
   --color-foreground: var(--color-off-white);
-  --color-surface: var(--color-midnight-sapphire);
-  --color-surface-foreground: var(--color-off-white);
-  --color-accent: var(--color-champagne-gold);
-  --color-accent-foreground: var(--color-deep-black);
   --color-muted-foreground: var(--color-titanium-silver);
+  --color-subtle-foreground: color-mix(
+    in srgb,
+    var(--color-titanium-silver) 55%,
+    var(--color-deep-black) 45%
+  );
+
+  /* Card/panel surfaces: lighter than background-elevated so a card stays
+     legible whether it sits on a black or a sapphire section. */
+  --color-surface: color-mix(
+    in srgb,
+    var(--color-midnight-sapphire) 85%,
+    var(--color-titanium-silver) 15%
+  );
+  --color-surface-hover: color-mix(
+    in srgb,
+    var(--color-midnight-sapphire) 75%,
+    var(--color-titanium-silver) 25%
+  );
+  --color-surface-foreground: var(--color-off-white);
+
   --color-border: color-mix(in srgb, var(--color-titanium-silver) 28%, transparent);
+  --color-border-hover: color-mix(in srgb, var(--color-titanium-silver) 46%, transparent);
+
+  --color-accent: var(--color-champagne-gold);
+  --color-accent-hover: color-mix(
+    in srgb,
+    var(--color-champagne-gold) 85%,
+    var(--color-deep-black) 15%
+  );
+  --color-accent-foreground: var(--color-deep-black);
+
   --color-focus-ring: var(--color-champagne-gold);
 
-  /*
+  /* System feedback colors: desaturated so they read as calm status
+     indicators, never as bright generic UI-kit alerts. */
+  --color-success: #3e7c5a;
+  --color-success-foreground: var(--color-off-white);
+  --color-warning: #c68a3d;
+  --color-warning-foreground: var(--color-deep-black);
+  --color-error: #b24b3c;
+  --color-error-foreground: var(--color-off-white);
+
+  /* ---------------------------------------------------------------------
    * Typography family tokens. No font has been approved yet (see
    * docs/17-architecture-plan.md, Architecture Decisions). This stack uses
    * each platform's native premium system font as a temporary placeholder.
    * Replace these two values to change the typeface everywhere at once.
-   */
+   * --------------------------------------------------------------------- */
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Noto Sans", sans-serif;
@@ -43,9 +91,9 @@
 
   /*
    * Typography scale. Each size is paired with a matching line-height via
-   * Tailwind's companion syntax. Font weight and letter spacing are applied
-   * with standard utilities where each style is used (see the .heading-*,
-   * .copy-* and .label-* helper classes below).
+   * Tailwind's companion syntax. Weight, letter spacing and text-transform
+   * are applied per style via the .heading-*, .copy-* and .label-* helper
+   * classes below, so each style is only ever defined once.
    */
   --text-display: clamp(2.5rem, 1.6rem + 3.5vw, 4.5rem);
   --text-display--line-height: 1.05;
@@ -68,11 +116,17 @@
   --text-body: 1rem;
   --text-body--line-height: 1.65;
 
-  --text-small: 0.875rem;
-  --text-small--line-height: 1.5;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.4;
 
   --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1.4;
+
+  --text-metadata: 0.75rem;
+  --text-metadata--line-height: 1.4;
 
   --text-nav: 0.9375rem;
   --text-nav--line-height: 1.2;
@@ -80,7 +134,9 @@
   --text-button: 0.9375rem;
   --text-button--line-height: 1.2;
 
-  /* Radius scale: restrained and architectural, not overly rounded */
+  /* ---------------------------------------------------------------------
+   * Radius scale: restrained and architectural, not overly rounded.
+   * --------------------------------------------------------------------- */
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.625rem;
@@ -91,11 +147,27 @@
   --shadow-subtle: 0 1px 2px 0 rgb(3 5 7 / 0.4);
   --shadow-elevated: 0 20px 40px -16px rgb(3 5 7 / 0.55);
 
-  /* Max-width content container, used by PageContainer */
+  /* ---------------------------------------------------------------------
+   * Container widths (see PageContainer). "content" is the standard page
+   * width; narrow/wide are the deliberate variants for reading-width copy
+   * and wide showcases respectively.
+   * --------------------------------------------------------------------- */
+  --container-narrow: 42rem;
   --container-content: 80rem;
+  --container-wide: 96rem;
 
-  /* Section vertical rhythm, responsive without extra media queries */
+  /* ---------------------------------------------------------------------
+   * Spacing scale, from micro (inline gaps) to page (hero-level breathing
+   * room). Section and major-page tiers are fluid via clamp() so mobile
+   * and 1600px+ desktops both get proportionate rhythm without extra
+   * breakpoints.
+   * --------------------------------------------------------------------- */
+  --spacing-micro: 0.5rem;
+  --spacing-component: 1rem;
+  --spacing-card: 1.5rem;
+  --spacing-content: 2.5rem;
   --spacing-section-y: clamp(3.5rem, 2.5rem + 4vw, 7rem);
+  --spacing-page: clamp(4.5rem, 3.5rem + 6vw, 10rem);
 }
 
 /*
@@ -118,11 +190,11 @@
 }
 
 /*
- * Semantic typography helpers. These are the "display, h1, h2, h3, h4,
- * body, body-large, small, eyebrow, navigation, button" styles requested
- * for the foundation. Compose the size/line-height token above with the
- * weight, tracking and transform each style should always carry, so that
- * pairing never has to be repeated (or drift) at each point of use.
+ * Semantic typography helpers: the display, h1, h2, h3, h4, body-lg, body,
+ * body-sm, caption, eyebrow, metadata, navigation and button styles.
+ * Compose the size/line-height token above with the weight, tracking and
+ * transform each style should always carry, so pairing never has to be
+ * repeated (or drift) at each point of use.
  */
 @layer components {
   .heading-display {
@@ -153,12 +225,20 @@
     @apply text-body font-normal;
   }
 
-  .copy-small {
-    @apply text-small font-normal;
+  .copy-body-sm {
+    @apply text-body-sm font-normal;
+  }
+
+  .copy-caption {
+    @apply text-caption font-normal;
   }
 
   .label-eyebrow {
     @apply text-eyebrow font-semibold tracking-[0.18em] uppercase;
+  }
+
+  .label-metadata {
+    @apply text-metadata font-medium tracking-[0.04em] uppercase;
   }
 
   .label-nav {
@@ -172,6 +252,31 @@
   /* Visually hidden until keyboard-focused, used for the skip link */
   .skip-link {
     @apply sr-only focus:not-sr-only;
+  }
+
+  /* ---------------------------------------------------------------------
+   * Surface system: the reusable elevation/definition tiers that Card and
+   * other panels compose. Kept intentionally restrained (a border and a
+   * soft shadow at most) rather than glass/blur effects.
+   * --------------------------------------------------------------------- */
+  .surface-base {
+    @apply bg-surface text-surface-foreground;
+  }
+
+  .surface-elevated {
+    @apply bg-surface text-surface-foreground shadow-elevated;
+  }
+
+  .surface-bordered {
+    @apply border border-border bg-transparent text-foreground;
+  }
+
+  .surface-premium {
+    @apply border border-border bg-surface text-surface-foreground shadow-elevated;
+  }
+
+  .surface-interactive {
+    @apply border border-transparent bg-surface text-surface-foreground transition-colors duration-(--duration-fast) ease-(--ease-standard) hover:border-border-hover hover:bg-surface-hover;
   }
 }
 
@@ -208,12 +313,41 @@
     color: var(--color-deep-black);
   }
 
+  /* Native <dialog> entrance transition. Exit is intentionally instant
+     (no allow-discrete choreography) to keep this reliable and simple;
+     see docs/18-design-system-reference.md, Motion Conventions. */
+  dialog {
+    opacity: 1;
+    scale: 1;
+    transition:
+      opacity var(--duration-base) var(--ease-standard),
+      scale var(--duration-base) var(--ease-standard);
+  }
+
+  dialog::backdrop {
+    background-color: color-mix(in srgb, var(--color-deep-black) 70%, transparent);
+    opacity: 1;
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      scale: 0.96;
+    }
+
+    dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
   /* Respect the operating system's reduced-motion preference everywhere,
      rather than requiring every future animation to opt in individually. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
-    *::after {
+    *::after,
+    *::backdrop {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
