@@ -1,0 +1,18 @@
+Read CLAUDE.md and every document under docs/.
+
+Do NOT build the website yet.
+
+Your job in this turn is to:
+1. Understand the NUVAIX brand and verified company information.
+2. Inspect the current repository.
+3. Propose the exact technical architecture.
+4. Propose the route tree.
+5. Propose the component hierarchy.
+6. Propose the content/data architecture.
+7. Identify dependencies that are actually necessary.
+8. Identify unknowns that require human confirmation.
+9. Create a phased implementation plan matching docs/14-claude-code-build-sequence.md.
+
+Do not invent company facts.
+Do not install unnecessary packages.
+Do not start implementation until you have returned the plan.

@@ -1,0 +1,19 @@
+Implement Milestone 1 only: project foundation.
+
+Requirements:
+- Next.js App Router
+- TypeScript strict
+- Tailwind CSS
+- centralized NUVAIX design tokens
+- global typography
+- responsive container
+- accessible focus states
+- base Button/Card/SectionHeading primitives
+- clean app shell
+- favicon/metadata placeholders
+- no fabricated company content
+
+Do not implement full pages yet.
+
+After coding, run lint, typecheck and build.
+Fix all errors before stopping.

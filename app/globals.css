@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+/*
+ * NUVAIX GROUP design tokens.
+ *
+ * This @theme block is the single source of truth for color, typography,
+ * radius, shadow and container values. Tailwind generates matching utility
+ * classes from every key here (for example --color-champagne-gold produces
+ * bg-champagne-gold, text-champagne-gold, border-champagne-gold, and so on).
+ *
+ * Do not hard-code brand hex values, font sizes, or radii anywhere else in
+ * the codebase. Extend or adjust the values below instead.
+ */
+@theme {
+  /* Brand colors (see docs/04-design-system.md) */
+  --color-midnight-sapphire: #0a1d3d;
+  --color-titanium-silver: #c0c6cf;
+  --color-champagne-gold: #d4af37;
+  --color-deep-black: #030507;
+  --color-off-white: #f5f5f2;
+
+  /* Semantic color roles, built from the brand colors above */
+  --color-background: var(--color-deep-black);
+  --color-foreground: var(--color-off-white);
+  --color-surface: var(--color-midnight-sapphire);
+  --color-surface-foreground: var(--color-off-white);
+  --color-accent: var(--color-champagne-gold);
+  --color-accent-foreground: var(--color-deep-black);
+  --color-muted-foreground: var(--color-titanium-silver);
+  --color-border: color-mix(in srgb, var(--color-titanium-silver) 28%, transparent);
+  --color-focus-ring: var(--color-champagne-gold);
+
+  /*
+   * Typography family tokens. No font has been approved yet (see
+   * docs/17-architecture-plan.md, Architecture Decisions). This stack uses
+   * each platform's native premium system font as a temporary placeholder.
+   * Replace these two values to change the typeface everywhere at once.
+   */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+  --font-display: var(--font-sans);
+
+  /*
+   * Typography scale. Each size is paired with a matching line-height via
+   * Tailwind's companion syntax. Font weight and letter spacing are applied
+   * with standard utilities where each style is used (see the .heading-*,
+   * .copy-* and .label-* helper classes below).
+   */
+  --text-display: clamp(2.5rem, 1.6rem + 3.5vw, 4.5rem);
+  --text-display--line-height: 1.05;
+
+  --text-h1: clamp(2.25rem, 1.7rem + 2.2vw, 3.25rem);
+  --text-h1--line-height: 1.1;
+
+  --text-h2: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --text-h2--line-height: 1.15;
+
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.25;
+
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.35;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.4;
+
+  --text-nav: 0.9375rem;
+  --text-nav--line-height: 1.2;
+
+  --text-button: 0.9375rem;
+  --text-button--line-height: 1.2;
+
+  /* Radius scale: restrained and architectural, not overly rounded */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  /* Shadows: subtle, no glow */
+  --shadow-subtle: 0 1px 2px 0 rgb(3 5 7 / 0.4);
+  --shadow-elevated: 0 20px 40px -16px rgb(3 5 7 / 0.55);
+
+  /* Max-width content container, used by PageContainer */
+  --container-content: 80rem;
+
+  /* Section vertical rhythm, responsive without extra media queries */
+  --spacing-section-y: clamp(3.5rem, 2.5rem + 4vw, 7rem);
+}
+
+/*
+ * Tokens that do not need a matching Tailwind utility class are declared as
+ * plain CSS custom properties and consumed with the arbitrary-value syntax,
+ * for example: duration-(--duration-base) ease-(--ease-standard) z-(--z-modal)
+ */
+:root {
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 600ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --z-dropdown: 30;
+  --z-sticky: 40;
+  --z-overlay: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+}
+
+/*
+ * Semantic typography helpers. These are the "display, h1, h2, h3, h4,
+ * body, body-large, small, eyebrow, navigation, button" styles requested
+ * for the foundation. Compose the size/line-height token above with the
+ * weight, tracking and transform each style should always carry, so that
+ * pairing never has to be repeated (or drift) at each point of use.
+ */
+@layer components {
+  .heading-display {
+    @apply text-display font-semibold tracking-tight;
+  }
+
+  .heading-h1 {
+    @apply text-h1 font-semibold tracking-tight;
+  }
+
+  .heading-h2 {
+    @apply text-h2 font-semibold tracking-tight;
+  }
+
+  .heading-h3 {
+    @apply text-h3 font-semibold;
+  }
+
+  .heading-h4 {
+    @apply text-h4 font-semibold;
+  }
+
+  .copy-body-lg {
+    @apply text-body-lg font-normal;
+  }
+
+  .copy-body {
+    @apply text-body font-normal;
+  }
+
+  .copy-small {
+    @apply text-small font-normal;
+  }
+
+  .label-eyebrow {
+    @apply text-eyebrow font-semibold tracking-[0.18em] uppercase;
+  }
+
+  .label-nav {
+    @apply text-nav font-medium tracking-[0.01em];
+  }
+
+  .label-button {
+    @apply text-button font-semibold tracking-[0.02em];
+  }
+
+  /* Visually hidden until keyboard-focused, used for the skip link */
+  .skip-link {
+    @apply sr-only focus:not-sr-only;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased min-h-dvh;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-line: none;
+  }
+
+  /* Never remove focus indication outright: replace it with a deliberate,
+     on-brand ring that only appears for keyboard/programmatic focus. */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-champagne-gold);
+    color: var(--color-deep-black);
+  }
+
+  /* Respect the operating system's reduced-motion preference everywhere,
+     rather than requiring every future animation to opt in individually. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
