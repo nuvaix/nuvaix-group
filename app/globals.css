@@ -165,7 +165,12 @@
   --spacing-micro: 0.5rem;
   --spacing-component: 1rem;
   --spacing-card: 1.5rem;
-  --spacing-content: 2.5rem;
+  /* Named --spacing-block, not --spacing-content: Tailwind resolves
+     max-w-content (a --container-* key) by name, and a --spacing-content
+     key of the same name silently won the lookup instead, collapsing
+     every "standard" width container to 2.5rem. Found via Milestone 3
+     visual verification; keep these two scales' names disjoint. */
+  --spacing-block: 2.5rem;
   --spacing-section-y: clamp(3.5rem, 2.5rem + 4vw, 7rem);
   --spacing-page: clamp(4.5rem, 3.5rem + 6vw, 10rem);
 }

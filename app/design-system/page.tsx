@@ -239,7 +239,7 @@ export default function DesignSystemPage() {
           </Button>
         </div>
         <div className="mt-6 flex flex-wrap items-center gap-4">
-          <IconButton variant="primary" aria-label="Example primary icon button">
+          <IconButton variant="gold" aria-label="Example gold icon button">
             <ArrowRightIcon size={18} />
           </IconButton>
           <IconButton variant="secondary" aria-label="Close">

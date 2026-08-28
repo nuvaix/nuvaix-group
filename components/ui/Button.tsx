@@ -26,7 +26,7 @@ type NativeButtonProps = CommonProps &
 export type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 const baseStyles =
-  "label-button inline-flex items-center justify-center gap-2 rounded-md disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 transition-colors duration-(--duration-fast) ease-(--ease-standard)";
+  "label-button inline-flex items-center justify-center gap-2 rounded-md whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 transition-colors duration-(--duration-fast) ease-(--ease-standard)";
 
 // Only "gold" is a solid gold fill, reserved for a single primary CTA per
 // page. "primary" is the general-purpose default: a sapphire surface with

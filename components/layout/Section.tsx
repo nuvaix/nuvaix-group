@@ -28,7 +28,7 @@ const toneStyles: Record<SectionTone, string> = {
 };
 
 const sizeStyles: Record<SectionSize, string> = {
-  compact: "py-content",
+  compact: "py-block",
   standard: "py-section-y",
   large: "py-page",
 };
