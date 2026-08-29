@@ -1,5 +1,9 @@
 export interface TechnologyCapability {
   label: string;
+  /** Marks the capability highlighted in editorial presentations. A
+   * website storytelling decision only, not a claim of precedence.
+   * Exactly one capability is featured today. */
+  featured?: boolean;
 }
 
 /**
@@ -9,7 +13,7 @@ export interface TechnologyCapability {
  * about clients, projects or delivery volume.
  */
 export const technologyCapabilities: TechnologyCapability[] = [
-  { label: "Software Development" },
+  { label: "Software Development", featured: true },
   { label: "IT Solutions" },
   { label: "Technology Consulting" },
   { label: "Systems & Infrastructure Support" },

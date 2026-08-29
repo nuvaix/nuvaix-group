@@ -13,6 +13,8 @@ export interface PageHeroProps {
   visual?: boolean;
   visualTone?: GeometricFieldTone;
   cta?: { label: string; href: string };
+  /** An optional second, less prominent action alongside cta. */
+  secondaryCta?: { label: string; href: string };
 }
 
 /**
@@ -30,6 +32,7 @@ export function PageHero({
   visual = true,
   visualTone = "silver",
   cta,
+  secondaryCta,
 }: PageHeroProps) {
   const isLight = theme === "light";
 
@@ -69,10 +72,15 @@ export function PageHero({
           </p>
         ) : null}
         {cta ? (
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-4">
             <Button href={cta.href} variant="gold">
               {cta.label}
             </Button>
+            {secondaryCta ? (
+              <Button href={secondaryCta.href} variant="outline">
+                {secondaryCta.label}
+              </Button>
+            ) : null}
           </div>
         ) : null}
       </PageContainer>
