@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Section } from "./Section";
+import { Logo } from "./Logo";
+import { SocialLinks } from "./SocialLinks";
 import { Divider } from "@/components/ui/Divider";
 import { Button } from "@/components/ui/Button";
 import { company } from "@/data/company";
@@ -14,8 +16,8 @@ export function Footer() {
       <Section tone="black" size="large" containerClassName="space-y-16">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <Link href="/" className="heading-h2 inline-block text-foreground">
-              NUVAIX <span className="text-champagne-gold">GROUP</span>
+            <Link href="/" className="inline-block">
+              <Logo variant="full" size="lg" />
             </Link>
             <p className="label-eyebrow text-muted-foreground mt-4">{company.brandLine}</p>
           </div>
@@ -66,9 +68,12 @@ export function Footer() {
 
         <Divider />
 
-        <p className="copy-caption text-subtle-foreground">
-          &copy; {year} {company.legalName}. All rights reserved.
-        </p>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="copy-caption text-subtle-foreground">
+            &copy; {year} {company.legalName}. All rights reserved.
+          </p>
+          <SocialLinks />
+        </div>
       </Section>
     </footer>
   );

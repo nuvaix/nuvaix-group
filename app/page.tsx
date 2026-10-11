@@ -16,6 +16,7 @@ const description =
 export const metadata: Metadata = {
   title: "NUVAIX GROUP",
   description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: "NUVAIX GROUP",
     description,

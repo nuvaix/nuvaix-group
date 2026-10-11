@@ -47,7 +47,7 @@ export function PageHero({
       <PageContainer className="relative">
         <p
           className={cn(
-            "label-eyebrow mb-4",
+            "label-eyebrow animate-reveal mb-4",
             isLight ? "text-midnight-sapphire" : "text-champagne-gold",
           )}
         >
@@ -55,7 +55,7 @@ export function PageHero({
         </p>
         <h1
           className={cn(
-            "heading-display max-w-3xl",
+            "heading-display animate-reveal max-w-3xl [animation-delay:80ms]",
             isLight ? "text-deep-black" : "text-off-white",
           )}
         >
@@ -64,7 +64,7 @@ export function PageHero({
         {description ? (
           <p
             className={cn(
-              "copy-body-lg mt-6 max-w-xl",
+              "copy-body-lg animate-reveal mt-6 max-w-xl [animation-delay:200ms]",
               isLight ? "text-deep-black/70" : "text-titanium-silver",
             )}
           >
@@ -72,7 +72,7 @@ export function PageHero({
           </p>
         ) : null}
         {cta ? (
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="animate-reveal mt-10 flex flex-wrap gap-4 [animation-delay:320ms]">
             <Button href={cta.href} variant="gold">
               {cta.label}
             </Button>

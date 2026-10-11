@@ -1,7 +1,12 @@
 {
   "name": "nuvaix-group",
   "version": "0.1.0",
+  "description": "Corporate website for NUVAIX GROUP (NUVAIX SOLUTIONS LTD, RC 9597904). Next.js App Router, TypeScript, and Tailwind CSS.",
   "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

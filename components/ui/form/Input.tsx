@@ -9,7 +9,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export function Input({ state = "default", className, ...rest }: InputProps) {
   return (
     <input
-      className={cn(controlBase, "h-11 px-4", fieldStateBorder[state], className)}
+      className={cn(controlBase, "bg-transparent h-11 px-4", fieldStateBorder[state], className)}
       aria-invalid={state === "invalid" || undefined}
       {...rest}
     />

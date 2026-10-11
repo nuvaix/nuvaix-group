@@ -17,6 +17,18 @@ export interface ValuePillar {
   application: string;
 }
 
+export type SocialPlatform = "GitHub" | "LinkedIn" | "Instagram" | "Facebook" | "TikTok";
+
+export interface SocialLink {
+  platform: SocialPlatform;
+  /** The verified, clean public profile URL. Never an internal/admin
+   * management URL (e.g. a Business Manager link), even if one was
+   * supplied alongside it. */
+  href: string;
+  /** Accessible name for the icon-only link, e.g. "NUVAIX on LinkedIn". */
+  label: string;
+}
+
 export interface CompanyIdentity {
   /** Public-facing brand name. */
   brandName: string;
@@ -30,4 +42,8 @@ export interface CompanyIdentity {
   heroLines: string[];
   /** The core brand line broken into its four named pillars. */
   valuePillars: ValuePillar[];
+  /** Verified public contact mailbox. Not a personal or founder address. */
+  publicEmail?: string;
+  /** Verified public social accounts only. */
+  socialLinks?: SocialLink[];
 }

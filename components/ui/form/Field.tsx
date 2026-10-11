@@ -20,7 +20,12 @@ export interface FieldProps {
 }
 
 /** Lays out a Label, a control, and its description/error message with
- * consistent spacing. Presentational only: no validation logic. */
+ * consistent spacing. Presentational only: no validation logic.
+ *
+ * The description/error each get a stable, predictable id derived from
+ * `htmlFor` (`${htmlFor}-description` / `${htmlFor}-error`), so the
+ * consumer can wire `aria-describedby` onto the actual control without
+ * generating or passing ids separately (Milestone 14, Accessibility). */
 export function Field({
   label,
   htmlFor,
@@ -38,8 +43,12 @@ export function Field({
         </Label>
       ) : null}
       {children}
-      {description ? <FieldDescription>{description}</FieldDescription> : null}
-      <FieldError>{error}</FieldError>
+      {description ? (
+        <FieldDescription id={htmlFor ? `${htmlFor}-description` : undefined}>
+          {description}
+        </FieldDescription>
+      ) : null}
+      <FieldError id={htmlFor ? `${htmlFor}-error` : undefined}>{error}</FieldError>
     </div>
   );
 }

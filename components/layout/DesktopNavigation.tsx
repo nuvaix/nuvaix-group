@@ -26,7 +26,22 @@ function isActive(href: string, activePath: string) {
  * The Businesses mega menu is rendered outside the per-item wrapper,
  * positioned relative to the whole nav row instead of the individual
  * trigger: centering a wide panel under a single item near the left of
- * the row would run it off the edge of the viewport.
+ * the row would run it off the edge of the viewport. Technology and
+ * Paint's NavDropdown panels, by contrast, are DOM children of their own
+ * trigger's hoverable wrapper, so that wrapper's own onMouseLeave is
+ * enough for them (see NavDropdown.tsx for how the trigger-to-panel gap
+ * is bridged there).
+ *
+ * Because the Businesses panel is a sibling, not a descendant, of its
+ * trigger's small hoverable wrapper, that wrapper's onMouseLeave alone
+ * cannot correctly track it: moving the pointer from the trigger onto
+ * the panel would fire that wrapper's mouseleave before the panel could
+ * register the pointer at all, closing the menu mid-transit (the bug
+ * this fixes). Instead, the trigger's wrapper only opens the menu on
+ * hover; closing it is handled once, below, by this component's outer
+ * element, which does contain both the trigger and the panel as
+ * descendants, so hovering continuously from one to the other never
+ * exits its subtree.
  */
 export function DesktopNavigation({
   openMenu,
@@ -34,7 +49,14 @@ export function DesktopNavigation({
   activePath,
 }: DesktopNavigationProps) {
   return (
-    <div className="relative hidden xl:block">
+    <div
+      className="relative hidden xl:block"
+      onMouseLeave={() => {
+        if (openMenu === "businesses") {
+          onOpenMenuChange(null);
+        }
+      }}
+    >
       <nav aria-label="Primary" className="flex items-center">
         {primaryNav.map((item) => {
           const active = isActive(item.href, activePath);
@@ -57,13 +79,16 @@ export function DesktopNavigation({
 
           const isOpen = openMenu === item.dropdown;
           const panelId = `${item.dropdown}-panel`;
+          const isBusinesses = item.dropdown === "businesses";
 
           return (
             <div
               key={item.href}
               className="relative"
               onMouseEnter={() => onOpenMenuChange(item.dropdown ?? null)}
-              onMouseLeave={() => onOpenMenuChange(null)}
+              // Businesses closes via the outer wrapper above instead
+              // (its panel is a sibling, not a child, of this div).
+              onMouseLeave={isBusinesses ? undefined : () => onOpenMenuChange(null)}
             >
               <button
                 type="button"
@@ -86,7 +111,7 @@ export function DesktopNavigation({
                 />
               </button>
 
-              {item.dropdown === "businesses" ? null : (
+              {isBusinesses ? null : (
                 <NavDropdown
                   id={panelId}
                   open={isOpen}
@@ -103,8 +128,6 @@ export function DesktopNavigation({
         id="businesses-panel"
         open={openMenu === "businesses"}
         onNavigate={() => onOpenMenuChange(null)}
-        onMouseEnter={() => onOpenMenuChange("businesses")}
-        onMouseLeave={() => onOpenMenuChange(null)}
       />
     </div>
   );

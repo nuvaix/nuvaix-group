@@ -14,10 +14,20 @@ const secondaryDivisions = businesses.filter((business) => !business.featured);
  * get a large featured treatment, the remaining nine divisions sit in a
  * tighter secondary grid. All business data comes from data/businesses.ts,
  * nothing here is retyped.
+ *
+ * tone="sapphire" (not "black"): this section follows HomeIntro's own
+ * sapphire tone, pairing "Who We Are" with "what we're built across" as
+ * one identity/structure introduction, before the two immersive black
+ * GeometricField sections (Technology, Paint) that follow. Without this,
+ * BusinessEcosystem/TechnologyFeature/PaintFeature ran three sections of
+ * flat black in a row (see homepage rhythm audit). Card surfaces use
+ * --color-surface, which is deliberately built to stay legible on either
+ * a black or a sapphire section (see app/globals.css), so this change is
+ * purely a section-background swap, not a card-level change.
  */
 export function BusinessEcosystem() {
   return (
-    <Section tone="black">
+    <Section tone="sapphire">
       <SectionHeading
         eyebrow="Business Ecosystem"
         title="Built across industries."

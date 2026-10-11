@@ -41,4 +41,31 @@ export const company: CompanyIdentity = {
       application: "Guides how NUVAIX GROUP invests in new divisions, partnerships and capability.",
     },
   ],
+  publicEmail: "nuvaixgroup@gmail.com",
+  // Verified public profile URLs only. A Business Manager URL was also
+  // supplied alongside these but is not a public-facing social
+  // destination, so it is intentionally excluded here.
+  socialLinks: [
+    { platform: "GitHub", href: "https://github.com/nuvaix", label: "NUVAIX on GitHub" },
+    {
+      platform: "LinkedIn",
+      href: "https://www.linkedin.com/company/nuvaixgroup/",
+      label: "NUVAIX on LinkedIn",
+    },
+    {
+      platform: "Instagram",
+      href: "https://www.instagram.com/nuvaixhq/",
+      label: "NUVAIX on Instagram",
+    },
+    {
+      platform: "Facebook",
+      href: "https://www.facebook.com/profile.php?id=61591267901067",
+      label: "NUVAIX on Facebook",
+    },
+    {
+      platform: "TikTok",
+      href: "https://www.tiktok.com/@nuvaixsolutions",
+      label: "NUVAIX on TikTok",
+    },
+  ],
 };

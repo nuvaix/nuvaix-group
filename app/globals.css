@@ -322,6 +322,16 @@
 
 @layer base {
   html {
+    /* This site has no light theme: every surface is dark. Without this,
+       browsers assume light and render native UI chrome (most visibly a
+       <select>'s opened options popup) with a light background and dark
+       text regardless of the page's own styling, which is illegible
+       against the same off-white text color the closed control uses.
+       This is the actual fix for that: the browser now renders its own
+       native controls (select popups, scrollbars, default form control
+       chrome) using dark-appropriate defaults everywhere, not only on
+       the Select component. */
+    color-scheme: dark;
     scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

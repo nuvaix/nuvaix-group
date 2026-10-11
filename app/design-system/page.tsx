@@ -341,7 +341,7 @@ export default function DesignSystemPage() {
               />
             </Field>
             <Field label="Company" htmlFor="ds-company">
-              <Input id="ds-company" name="company" state="valid" defaultValue="NUVAIX Group" />
+              <Input id="ds-company" name="company" state="valid" defaultValue="NUVAIX GROUP" />
             </Field>
             <Field label="Disabled field" htmlFor="ds-disabled">
               <Input id="ds-disabled" name="disabled" disabled placeholder="Not editable" />
@@ -573,7 +573,7 @@ export default function DesignSystemPage() {
             <p className="copy-body-sm text-muted-foreground mb-3">Error and success states</p>
             <div className="flex flex-wrap items-center gap-4">
               <Input state="invalid" defaultValue="invalid@" aria-label="Invalid example" />
-              <Input state="valid" defaultValue="valid@nuvaix.com" aria-label="Valid example" />
+              <Input state="valid" defaultValue="valid@example.com" aria-label="Valid example" />
             </div>
           </div>
         </div>
