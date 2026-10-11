@@ -111,13 +111,29 @@ docs/         Planning and governance documents (see below).
 | --- | --- |
 | `/` | Homepage |
 | `/businesses`, `/businesses/[slug]` | Business division directory and detail pages |
-| `/technology`, `/technology/solutions`, `/technology/training` | Technology division |
-| `/paint`, `/paint/products`, `/paint/colors`, `/paint/bulk-orders` | NUVAIX Paint experience |
+| `/technology`, `/technology/solutions`, `/technology/training`, `/technology/training/[slug]` | Technology division and training course detail |
+| `/paint`, `/paint/products`, `/paint/products/[slug]`, `/paint/colors`, `/paint/bulk-orders` | NUVAIX Paint experience, including per-product detail pages |
 | `/about`, `/about/mission`, `/about/vision`, `/about/values`, `/about/leadership` | Company/about section |
 | `/projects`, `/insights`, `/careers`, `/partnerships` | Content sections (see "Content governance" below) |
 | `/contact` | Enquiry form, backed by a Server Action |
 | `/privacy`, `/terms` | Legal pages |
 | `/design-system` | Internal, non-indexed reference page for design tokens and components |
+
+## SEO
+
+`sitemap.xml` and `robots.txt` are generated at build time from
+[app/sitemap.ts](app/sitemap.ts) and [app/robots.ts](app/robots.ts) using
+Next.js's built-in metadata file conventions, no third-party package
+required. Both read `NEXT_PUBLIC_SITE_URL` to build absolute URLs, so that
+variable must be set to the real production domain before launch (see
+"Environment variables" above). The sitemap is data-driven: static routes are
+listed explicitly, and every dynamic segment (`/businesses/[slug]`,
+`/paint/products/[slug]`, `/technology/training/[slug]`) is derived from its
+data source, so a route can never silently drift out of sync with what
+actually exists. The internal `/design-system` reference page is kept out of
+the sitemap and marked `robots: { index: false }` at the page level, since
+it is a development-only reference, not a public page. See
+[docs/08-seo-strategy.md](docs/08-seo-strategy.md) for the full strategy.
 
 ## Content governance
 
